@@ -44,7 +44,7 @@ export class BoilerplateActorSheet extends ActorSheet {
     const actorData = sheetData.actor;
 
     // Initialize containers.
-    const skill = [];
+    const skills = [];
     const gear = [];
     const features = [];
     const spells = {
@@ -67,7 +67,7 @@ export class BoilerplateActorSheet extends ActorSheet {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
       if (i.type === 'skill') {
-        skill.push(i);
+        skills.push(i);
       }
       // Append to gear.
       if (i.type === 'item') {
@@ -86,7 +86,7 @@ export class BoilerplateActorSheet extends ActorSheet {
     }
 
     // Assign and return
-    actorData.skill = skill;
+    actorData.skills = skills;
     actorData.gear = gear;
     actorData.features = features;
     actorData.spells = spells;
