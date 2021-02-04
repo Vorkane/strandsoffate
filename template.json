@@ -1,0 +1,85 @@
+{
+  "Actor": {
+    "types": ["character"],
+    "templates": {
+      "base": {
+        "fatePoints": {
+          "current": {
+            "value": 0
+          },
+          "refresh": {
+            "value": 0
+          }
+        }
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "reward": 0,
+      "experience": 0,
+      "biography": "",
+      "attributes": {
+        "level": {
+          "value": 1
+        }
+      },
+      "abilities": {
+        "agility": {
+          "value": 0
+        },
+        "body": {
+          "value": 0
+        },
+        "charisma": {
+          "value": 0
+        },
+        "intuition": {
+          "value": 0
+        },
+        "logic": {
+          "value": 0
+        },
+        "magic": {
+          "value": 0
+        },
+        "reaction": {
+          "value": 0
+        },
+        "strength": {
+          "value": 0
+        },
+        "willpower": {
+          "value": 0
+        }
+      },
+      "aspects": {},
+      "skill": {},
+      "stunts": {},
+      "tracks": {}
+    }
+  },
+  "Item": {
+    "types": ["skill", "item", "feature", "spell"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+    "skill": {
+      "templates": ["base"],
+      "value": 0
+    },
+    "item": {
+      "templates": ["base"],
+      "quantity": 1,
+      "weight": 0
+    },
+    "feature": {
+      "templates": ["base"]
+    },
+    "spell": {
+      "templates": ["base"],
+      "spellLevel": 1
+    }
+  }
+}
