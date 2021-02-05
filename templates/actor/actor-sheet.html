@@ -23,9 +23,9 @@
               <div class="resource flex-group-center">
                   <label class="resource-label">Fate Points</label>
                   <div class="resource-content flexrow flex-center flex-between">
-                    <input type="text" name="data.fatePoints.current" value="{{data.fatePoints.current.value}}" data-dtype="Number"/>
+                    <input type="text" name="data.fatePoints.current.value" value="{{data.fatePoints.current.value}}" data-dtype="Number" />
                     <span> / </span>
-                    <input type="text" name="data.fatePoints.refresh" value="{{data.fatePoints.refresh.value}}" data-dtype="Number"/>
+                    <input type="text" name="data.fatePoints.refresh.value" value="{{data.fatePoints.refresh.value}}" data-dtype="Number" />
                   </div>
               </div>
           </div>
@@ -37,7 +37,7 @@
         <a class="item" data-tab="abilities">Abilities</a>
         <a class="item" data-tab="skills">Skills</a>
         <a class="item" data-tab="items">Items</a>
-        <a class="item" data-tab="features">Features</a>
+        <a class="item" data-tab="aspects">Aspects</a>
         <a class="item" data-tab="spells">Spells</a>
         <a class="item" data-tab="description">Description</a>
     </nav>
@@ -76,7 +76,7 @@
             {{#each actor.skills as |item id|}}
                 <li class="item flexrow" data-item-id="{{item._id}}">
                     <!-- <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div> -->
-                    <h4 class="item-name">{{item.name}}</h4>
+                    <h4 class="item-name rollable">{{item.name}}</h4>
                     <h3 class="item-name">{{item.data.value}}</h3>
                     <div class="item-controls">
                         <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
@@ -110,17 +110,17 @@
             </ol>
         </div>
 
-        {{!-- Owned Features Tab --}}
-        <div class="tab features" data-group="primary" data-tab="features">
+        {{!-- Aspects Tab --}}
+        <div class="tab aspects" data-group="primary" data-tab="aspects">
             <ol class="items-list">
                 <li class="item flexrow item-header">
                   <div class="item-image"></div>
                   <div class="item-name">Name</div>
                   <div class="item-controls">
-                    <a class="item-control item-create" title="Create item" data-type="feature"><i class="fas fa-plus"></i> Add item</a>
+                    <a class="item-control item-create" title="Create item" data-type="aspect"><i class="fas fa-plus"></i> Add item</a>
                   </div>
                 </li>
-            {{#each actor.features as |item id|}}
+            {{#each actor.aspects as |item id|}}
                 <li class="item flexrow" data-item-id="{{item._id}}">
                     <div class="item-image"><img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/></div>
                     <h4 class="item-name">{{item.name}}</h4>
@@ -164,6 +164,20 @@
 
         {{!-- Biography Tab --}}
         <div class="tab biography" data-group="primary" data-tab="description">
+            <div class="resources grid grid-2col">
+              <div class="resource">
+                  <div class="resource-content flexrow flex-center flex-between">
+                    <label class="resource-label">Experience</label>
+                    <input type="text" name="data.experience" value="{{data.experience}}" data-dtype="Number" />
+                  </div>
+              </div>
+              <div class="resource">
+                  <div class="resource-content flexrow flex-center flex-between">
+                    <label class="resource-label">Reward</label>
+                    <input type="text" name="data.reward" value="{{data.reward}}" data-dtype="Number" />
+                  </div>
+              </div>
+            </div>
             {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
         </div>
 

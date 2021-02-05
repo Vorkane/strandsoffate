@@ -1,0 +1,18 @@
+<form>
+  <div class="form-group">
+    <label>{{localize "boilerplate.chat.skillCheck.options.penalty"}}</label>
+    <input type="text" name="penalty" value="0" />
+  </div>
+  <div class="form-group">
+    <label>{{localize "boilerplate.chat.skillCheck.options.closedRoll"}}</label>
+    <input type="checkbox" name="closedRoll" />
+  </div>
+  <div class="form-group">
+    <label>{{localize "boilerplate.chat.skillCheck.options.useFortune"}}</label>
+    <input type="checkbox" name="useFortune" />
+  </div>
+  <div class="form-group">
+    <label>{{localize "boilerplate.chat.skillCheck.options.difficulty"}}</label>
+    <input type="text" name="difficulty" value="0" />
+  </div>
+</form>

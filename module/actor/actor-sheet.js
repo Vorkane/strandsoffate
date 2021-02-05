@@ -46,7 +46,7 @@ export class BoilerplateActorSheet extends ActorSheet {
     // Initialize containers.
     const skills = [];
     const gear = [];
-    const features = [];
+    const aspects = [];
     const spells = {
       0: [],
       1: [],
@@ -74,8 +74,8 @@ export class BoilerplateActorSheet extends ActorSheet {
         gear.push(i);
       }
       // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i);
+      else if (i.type === 'aspect') {
+        aspects.push(i);
       }
       // Append to spells.
       else if (i.type === 'spell') {
@@ -88,7 +88,7 @@ export class BoilerplateActorSheet extends ActorSheet {
     // Assign and return
     actorData.skills = skills;
     actorData.gear = gear;
-    actorData.features = features;
+    actorData.aspects = aspects;
     actorData.spells = spells;
   }
 
@@ -123,9 +123,9 @@ export class BoilerplateActorSheet extends ActorSheet {
 
     // Drag events for macros.
     if (this.actor.owner) {
-      let handler = ev => this._onDragItemStart(ev);
+      let handler = ev => this._onDragStart(ev);
       html.find('li.item').each((i, li) => {
-        if (li.classList.contains("inventory-header")) return;
+        if (li.classList.contains("item-header")) return;
         li.setAttribute("draggable", true);
         li.addEventListener("dragstart", handler, false);
       });

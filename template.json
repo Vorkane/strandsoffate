@@ -3,18 +3,18 @@
     "types": ["character"],
     "templates": {
       "base": {
-        "fatePoints": {
-          "current": {
-            "value": 0
-          },
-          "refresh": {
-            "value": 0
-          }
-        }
       }
     },
     "character": {
       "templates": ["base"],
+      "fatePoints": {
+        "current": {
+          "value": 0
+        },
+        "refresh": {
+          "value": 0
+        }
+      },
       "reward": 0,
       "experience": 0,
       "biography": "",
@@ -59,7 +59,7 @@
     }
   },
   "Item": {
-    "types": ["skill", "item", "feature", "spell"],
+    "types": ["skill", "item", "aspect", "spell"],
     "templates": {
       "base": {
         "description": ""
@@ -74,7 +74,7 @@
       "quantity": 1,
       "weight": 0
     },
-    "feature": {
+    "aspect": {
       "templates": ["base"]
     },
     "spell": {
