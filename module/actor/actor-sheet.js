@@ -17,6 +17,7 @@ export class BoilerplateActorSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
+
   /** @override */
   getData() {
     const data = super.getData();
@@ -121,6 +122,8 @@ export class BoilerplateActorSheet extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
+    html.find('.skill-roll').click(this._onSkillRoll.bind(this));
+
     // Drag events for macros.
     if (this.actor.owner) {
       let handler = ev => this._onDragStart(ev);
@@ -137,6 +140,7 @@ export class BoilerplateActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
+
   _onItemCreate(event) {
     event.preventDefault();
     const header = event.currentTarget;
@@ -179,4 +183,75 @@ export class BoilerplateActorSheet extends ActorSheet {
     }
   }
 
+  _onSkillRoll(event) {
+    event.preventDefault();
+    const element = event.currentTarget;
+    const dataset = element.dataset;
+
+    let choice = 0
+    skill_stat_prompt();
+
+    if (dataset.roll && choice == 1) {
+
+      let roll = new Roll(dataset.roll, this.actor.data.data);
+      let label = dataset.label ? `Rolling ${dataset.label}` : '';
+      roll.roll().toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: label
+      });
+    }
+  }
+}
+
+function skill_stat_prompt() {
+  let d = new Dialog ({
+    title: "Choose a Stat",
+    content: "<p>Choose wisely.</p>",
+    buttons: {
+      agility: {
+        label: "Agility",
+        callback: () => console.log("Chose Agility")
+      },
+      body: {
+        label: "Body",
+        callback: () => console.log("Chose Body")
+      },
+      charisma: {
+        label: "Charisma",
+        callback: () => console.log("Chose Charisma")
+      },
+      intuiton: {
+        label: "Intuition",
+        callback: () => console.log("Chose Intuition")
+      },
+      logic: {
+        label: "Logic",
+        callback: () => console.log("Chose Logic")
+      },
+      magic: {
+        label: "Magic",
+        callback: () => console.log("Chose Magic")
+      },
+      reaction: {
+        label: "Reaction",
+        callback: () => console.log("Chose Reaction")
+      },
+      strength: {
+        label: "Strength",
+        callback: () => console.log("Chose Strength")
+      },
+      willpower: {
+        label: "Willpower",
+        callback: () => console.log("Chose Willpower")
+      },
+      let choice = 1;
+    },
+    default: "intuition",
+    render: html => console.log("Test dialog"),
+    close: html => console.log("Close dialog")
+  });
+
+  d.render(true);
+
+  return choice;
 }
