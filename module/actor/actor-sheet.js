@@ -188,70 +188,100 @@ export class BoilerplateActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
 
-    let choice = 0
-    skill_stat_prompt();
+    let confirmed = false;
+    let ability_stat = "";
 
-    if (dataset.roll && choice == 1) {
+    if (dataset.roll) {
 
-      let roll = new Roll(dataset.roll, this.actor.data.data);
-      let label = dataset.label ? `Rolling ${dataset.label}` : '';
-      roll.roll().toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: label
-      });
+      new Dialog({
+        title: "Roll d20 + modifier",
+        content: `
+        <form>
+        <div class="form-group">
+        <label>Roll Modifier:</label>
+        <input id="modifier-value" name="modifier-value"></input>
+        </div>
+        </form>
+        `,
+        buttons: {
+          agility: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Agility",
+            callback: () => ability_stat = "@abilities.agility.value"
+            //callback: () => ability_stat = "data.abilities.agility.value"
+          },
+          body: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Body",
+            callback: () => ability_stat = "@abilities.body.value"
+          },
+          charisma: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Charmisma",
+            callback: () => ability_stat = "@abilities.charisma.value"
+          },
+          intuition: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Intuition",
+            callback: () => ability_stat = "@abilities.intuition.value"
+          },
+          logic: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Logic",
+            callback: () => ability_stat = "@abilities.logic.value"
+          },
+          magic: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Magic",
+            callback: () => ability_stat = "@abilities.magic.value"
+          },
+          reaction: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Reaction",
+            callback: () => ability_stat = "@abilities.reaction.value"
+          },
+          strength: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Strength",
+            callback: () => ability_stat = "@abilities.strength.value"
+          },
+          willpower: {
+            icon: '<i class="fas fa-check"></i>',
+            label: "Willpower",
+            callback: () => ability_stat = "@abilities.willpower.value"
+          },
+        },
+        default: "Cancel",
+        close: html => {
+          if (ability_stat != "") {
+            let rollModifier = parseInt(html.find('[name=modifier-value]')[0].value);
+            if (!rollModifier){
+              console.log(ability_stat);
+              let roll = new Roll(dataset.roll + "+" + ability_stat, this.actor.data.data);
+              let label = dataset.label ? `Rolling ${dataset.label}` : '';
+              roll.roll().toMessage({
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                flavor: label
+              });
+            }else{
+              let roll = new Roll(dataset.roll + "+" + ability_stat + " + " + rollModifier, this.actor.data.data);
+              let label = dataset.label ? `Rolling ${dataset.label}` : '';
+              roll.roll().toMessage({
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                flavor: label
+              });
+            }
+
+          }
+        }
+      }).render(true);
+
+      //let roll = new Roll(dataset.roll, this.actor.data.data);
+    //  let label = dataset.label ? `Rolling ${dataset.label}` : '';
+      //roll.roll().toMessage({
+      //  speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+    //    flavor: label
+    //  });
     }
   }
-}
-
-function skill_stat_prompt() {
-  let d = new Dialog ({
-    title: "Choose a Stat",
-    content: "<p>Choose wisely.</p>",
-    buttons: {
-      agility: {
-        label: "Agility",
-        callback: () => console.log("Chose Agility")
-      },
-      body: {
-        label: "Body",
-        callback: () => console.log("Chose Body")
-      },
-      charisma: {
-        label: "Charisma",
-        callback: () => console.log("Chose Charisma")
-      },
-      intuiton: {
-        label: "Intuition",
-        callback: () => console.log("Chose Intuition")
-      },
-      logic: {
-        label: "Logic",
-        callback: () => console.log("Chose Logic")
-      },
-      magic: {
-        label: "Magic",
-        callback: () => console.log("Chose Magic")
-      },
-      reaction: {
-        label: "Reaction",
-        callback: () => console.log("Chose Reaction")
-      },
-      strength: {
-        label: "Strength",
-        callback: () => console.log("Chose Strength")
-      },
-      willpower: {
-        label: "Willpower",
-        callback: () => console.log("Chose Willpower")
-      },
-      let choice = 1;
-    },
-    default: "intuition",
-    render: html => console.log("Test dialog"),
-    close: html => console.log("Close dialog")
-  });
-
-  d.render(true);
-
-  return choice;
 }
