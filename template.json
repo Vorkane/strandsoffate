@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character"],
+    "types": ["character", "npc"],
     "templates": {
       "base": {
       }
@@ -59,7 +59,7 @@
     }
   },
   "Item": {
-    "types": ["skill", "item", "aspect", "spell"],
+    "types": ["skill", "item", "aspect", "spell", "weapon"],
     "templates": {
       "base": {
         "description": ""
@@ -80,6 +80,12 @@
     "spell": {
       "templates": ["base"],
       "spellLevel": 1
+    },
+    "weapon": {
+      "templates": ["base"],
+      "weapon_rating": 0,
+      "quantity": 1,
+      "weight": 0
     }
   }
 }
